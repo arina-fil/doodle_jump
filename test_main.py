@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
-import main  # Assuming main.py is structured as provided
+import main  
 
 class TestMainGame(unittest.TestCase):
 
@@ -37,7 +37,7 @@ class TestMainGame(unittest.TestCase):
             main.add_record(record)
             self.assertIn(record, main.records_mass)
             self.assertEqual(len(main.records_mass), 10)
-            self.assertEqual(main.records_mass[0], 150)  # Highest record
+            self.assertEqual(main.records_mass[0], 150) 
             print("✅ test_add_record PASSED!")
         except Exception as e:
             print(f"❌ test_add_record failed!\n{e}")
@@ -70,7 +70,7 @@ class TestMainGame(unittest.TestCase):
         print("Testing draw_menu_interface...")
         try:
             screen = MagicMock()
-            main.menu_buttons[0]['click'] = True  # Simulate button click
+            main.menu_buttons[0]['click'] = True 
             main.draw_menu_interface(screen)
             self.assertTrue(main.menu_buttons[0]['click'])
             print("✅ test_draw_menu_interface PASSED!")
@@ -82,7 +82,7 @@ class TestMainGame(unittest.TestCase):
         print("Testing check_menu_events...")
         try:
             main.now_screen = 'menu'
-            click_pos = (500, 200)  # Position of the first button
+            click_pos = (500, 200) 
             main.check_menu_events(click_pos, have_click=True)
             self.assertTrue(main.menu_buttons[0]['click'])
             self.assertEqual(main.now_screen, 'choice')
@@ -92,7 +92,7 @@ class TestMainGame(unittest.TestCase):
 
     @patch('sys.exit')
     def test_menu_screen_exit(self, mock_exit):
-        """Test if menu_screen exits correctly on quit event."""
+        """Test правильно ли завершается работа menu_screen при завершении события."""
         print("Testing menu_screen...")
         try:
             with patch('main.pygame.event.get') as mock_events:
@@ -108,7 +108,7 @@ class TestMainGame(unittest.TestCase):
         print("Testing check_choice_events...")
         try:
             main.now_screen = 'choice'
-            click_pos = (300, 350)  # Position of the first choice button
+            click_pos = (300, 350) 
             main.check_choice_events(click_pos, have_click=True)
             self.assertTrue(main.choice_buttons[0]['click'])
             self.assertEqual(main.now_screen, 'game1')
@@ -121,7 +121,7 @@ class TestMainGame(unittest.TestCase):
         print("Testing draw_choice_interface...")
         try:
             screen = MagicMock()
-            main.choice_buttons[1]['click'] = True  # Simulate second button click
+            main.choice_buttons[1]['click'] = True 
             main.draw_choice_interface(screen)
             self.assertTrue(main.choice_buttons[1]['click'])
             print("✅ test_draw_choice_interface PASSED!")
